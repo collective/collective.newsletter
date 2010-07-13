@@ -8,7 +8,39 @@
       file="collective_newsletter_icon.png"
       />
 
-  <!--browser:menuItem
+  <include package="plone.app.contentmenu" />
+  <browser:menuItem
+    for="collective.newsletter.interfaces.IPossibleNewsletter"
+    menu="plone_contentmenu_actions"
+    title="Enable Newsletter"
+    action="${object_url}/newsletter-toggle"
+    description="Enable this content item to be able to sent as a Newsletter"
+    />
+  <browser:menuItem
+    for="collective.newsletter.interfaces.IPossibleNewsletter"
+    menu="plone_contentmenu_actions"
+    title="Disable Newsletter"
+    action="${object_url}/newsletter-toggle"
+    description="Disable this content item to be able to sent as a Newsletter"
+    />
+  <browser:menuItem
+    for="collective.newsletter.interfaces.INewsletterEnhanced"
+    menu="plone_contentmenu_actions"
+    title="Send Newsletter"
+    action="${object_url}/send-newsletter"
+    description="Send this content item as a Newsletter"
+    />
+
+  <!--
+filter="object/@@newslettersupport/can_activate"
+filter="object/@@newslettersupport/can_deactivate"
+permission="cmf.ModifyPortalContent" -->
+
+  <!-- browser:menu
+      id="object_buttons"
+      title="Plone Content Drop-Down Menu"
+      />
+  <browser:menuItem
       menu="object_buttons"
       for="collective.newsletter.interfaces.IPossibleNewsletter"
       title="Enable Newsletter"
@@ -16,7 +48,6 @@
       filter="object/@@newslettersupport/can_activate"
       permission="cmf.ModifyPortalContent"
       />
-
   <browser:menuItem
      menu="object_buttons"
      for="collective.newsletter.interfaces.IPossibleNewsletter"
@@ -24,7 +55,7 @@
      action="${object_url}/newsletter-toggle"
      filter="object/@@newslettersupport/can_deactivate"
      permission="cmf.ModifyPortalContent"
-     /-->
+     / -->
 
   <!-- browser:menuItem
      menu="object"
@@ -32,7 +63,7 @@
      title="Newsletter"
      action="${object_url}/send-newsletter"
      permission="cmf.ModifyPortalContent"
-      / -->
+     /-->
 
   <browser:page
      name="newsletter-toggle"
