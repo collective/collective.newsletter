@@ -5,7 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xml:lang="en"
       lang="en"
-      tal:define="global test view/test"
+      tal:define="global test view/test;
+	              portal_state context/@@plone_portal_state;
+				  site_properties context/portal_properties/site_properties;
+				  object_title context/@@plone_context_state/object_title;
+				  putils context/plone_utils;
+	              language portal_state/language"
       tal:attributes="lang language;
                       xml:lang language">
 
@@ -17,8 +22,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"
           tal:define="charset site_properties/default_charset|string:utf-8"
           tal:attributes="content string:text/html;;charset=${charset}" />
-    
-    <title tal:define="portal_title portal_properties/title;
+
+    <title tal:define="portal_title context/portal_properties/title;
                        page_title object_title">
       <tal:pagetitle replace="page_title">
         Inserts page title
@@ -47,24 +52,26 @@
           <style type="text/css"
 		 tal:condition="python: render != 'link'"
 		 tal:attributes="media stylesheet/getMedia | nothing;"
-		 tal:define="stylestring python:str(here.portal_css.getInlineResource(stylesheet.getId(), here))"
-		 tal:content="structure string: <!--  ${stylestring}  -->">
+
+		 >
           </style>
 	</tal:typedef>
       </tal:renderer>
     </tal:fetcher>
+
   </head>
 
-  <body tal:attributes="class string: newsletter ${here/getSectionFromURL};
+  <body tal:define="isRTL portal_state/is_rtl"
+        tal:attributes="class string: newsletter ${here/getSectionFromURL};
                         dir python:test(isRTL, 'rtl', 'ltr')">
 
-    <div tal:define="tabindex python: Iterator(pos=0, mainSlot=True)">
+    <div>
 
       <div id="content">
-        <div class="documentContent" id="region-content"> 
-	  
+        <div class="documentContent" id="region-content">
+
           <a name="documentContent"></a>
-	  
+
 	  <tal:render-object
 	     define="base_url here/absolute_url;
 		     layout python: view.getTargetObjectLayout(here);
@@ -73,10 +80,10 @@
 		     main_macro python: macros['main']">
 	    <tal:render metal:use-macro="main_macro" />
 	  </tal:render-object>
-	  
+
         </div>
       </div>
-      
+
     </div>
 
   </body>
