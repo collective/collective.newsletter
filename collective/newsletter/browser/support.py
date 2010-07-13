@@ -4,27 +4,24 @@ from zope import schema
 
 from Products.Five.browser import BrowserView
 
-from collective.newsletter import interfaces
+from collective.newsletter.interfaces import IPossibleNewsletter, INewsletterEnhanced
 from p4a.common import feature
 
-_marker = object()
-
 class NewsletterEnhancementToggleView(BrowserView):
-    _newsletter_activated = feature.FeatureProperty(
-        interfaces.IPossibleNewsletter,
-        interfaces.INewsletterEnhanced,
-        'context')
 
-    def newsletter_activated(self, v=_marker):
-        if v is _marker:
-            if interfaces.IPossibleNewsletter.providedBy(self.context):
-                return self._newsletter_activated
-            return False
-
-        if interfaces.IPossibleNewsletter.providedBy(self.context):
-            self._newsletter_activated = v
-
-    newsletter_activated = property(newsletter_activated, newsletter_activated)
+    # merged functionality with p4a.common.feature.FeatureProperty
+    def get_newsletter_state(self):
+        if IPossibleNewsletter.providedBy(self.context):
+            return INewsletterEnhanced.providedBy(self.context)
+        return False
+    def set_newsletter_state(self, state):
+        if IPossibleNewsletter.providedBy(self.context):
+            ifaces = interface.directlyProvidedBy(self.context)
+            if state and not INewsletterEnhanced.providedBy(self.context):
+                interface.alsoProvides(obj, INewsletterEnhanced)
+            elif not state and INewsletterEnhanced in ifaces:
+                interface.directlyProvides(obj, ifaces - INewsletterEnhanced)
+    newsletter_activated = property(get_newsletter_state, set_newsletter_state)
 
     def __init__(self, context, request):
         self.context = context
@@ -51,8 +48,8 @@ class Support(object):
 
     @property
     def can_activate(self):
-        return not interfaces.INewsletterEnhanced.providedBy(self.context)
+        return not INewsletterEnhanced.providedBy(self.context)
 
     @property
     def can_deactivate(self):
-        return interfaces.INewsletterEnhanced.providedBy(self.context)
+        return INewsletterEnhanced.providedBy(self.context)
