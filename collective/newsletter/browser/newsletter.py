@@ -12,11 +12,7 @@ from zope.component import getUtility, getAdapter
 
 from Products.CMFCore.utils import getToolByName
 
-try:
-    from Products.CMFDynamicViewFTI.interfaces import ISelectableBrowserDefault
-    HAS_ISBD = True
-except ImportError:
-    HAS_ISBD = False
+from Products.CMFDynamicViewFTI.interfaces import ISelectableBrowserDefault
 
 class DefaultNewsletterRenderer(BrowserView):
     def __call__(self):
@@ -36,17 +32,10 @@ class DefaultNewsletterRenderer(BrowserView):
         """
         Returns target object 'view' action page template
         """
-
-        if HAS_ISBD and ISelectableBrowserDefault.isImplementedBy(target):
+        if ISelectableBrowserDefault.providedBy(target):
             return target.getLayout()
         else:
-            view = target.getTypeInfo().getActionById('view') or 'base_view'
-
-            # If view action is view, try to guess correct template
-            if view == 'view':
-                view = target.portal_type.lower() + '_view'
-
-        return view
+            return 'base_view'
 
 class SendNewsletterView(BrowserView):
     def __init__(self, context, request):
