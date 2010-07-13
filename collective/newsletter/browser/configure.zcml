@@ -1,62 +1,67 @@
 <configure
    xmlns="http://namespaces.zope.org/zope"
-   xmlns:browser="http://namespaces.zope.org/browser" 
-   i18n_domain="Plone4Artists">
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="collective.newsletter">
 
-  <browser:menuItem
+  <browser:resource
+      name="collective_newsletter_icon.png"
+      file="collective_newsletter_icon.png"
+      />
+
+  <!--browser:menuItem
       menu="object_buttons"
-      for="p4a.plonenewsletter.interfaces.IPossibleNewsletter"
+      for="collective.newsletter.interfaces.IPossibleNewsletter"
       title="Enable Newsletter"
       action="${object_url}/newsletter-toggle"
-      filter="object/@@p4anewslettersupport/can_activate"
+      filter="object/@@newslettersupport/can_activate"
       permission="cmf.ModifyPortalContent"
       />
 
   <browser:menuItem
      menu="object_buttons"
-     for="p4a.plonenewsletter.interfaces.IPossibleNewsletter"
+     for="collective.newsletter.interfaces.IPossibleNewsletter"
      title="Disable Newsletter"
      action="${object_url}/newsletter-toggle"
-     filter="object/@@p4anewslettersupport/can_deactivate"
+     filter="object/@@newslettersupport/can_deactivate"
      permission="cmf.ModifyPortalContent"
-     />
+     /-->
 
-  <browser:menuItem
+  <!-- browser:menuItem
      menu="object"
-     for="p4a.plonenewsletter.interfaces.INewsletterEnhanced"
+     for="collective.newsletter.interfaces.INewsletterEnhanced"
      title="Newsletter"
      action="${object_url}/send-newsletter"
      permission="cmf.ModifyPortalContent"
-      />
+      / -->
 
   <browser:page
      name="newsletter-toggle"
-     for="p4a.plonenewsletter.interfaces.IPossibleNewsletter"
+     for="collective.newsletter.interfaces.IPossibleNewsletter"
      permission="cmf.ModifyPortalContent"
-     class=".support.NewsletterEnhancementToggleView"
+     class="collective.newsletter.browser.support.NewsletterEnhancementToggleView"
      />
-  
+
   <browser:page
-      name="p4anewslettersupport"
+      name="newslettersupport"
       for="*"
-      class=".support.Support"
+      class="collective.newsletter.browser.support.Support"
       permission="zope.Public"
-      allowed_interface="p4a.plonenewsletter.interfaces.IBasicNewsletterSupport"
-      />  
+      allowed_interface="collective.newsletter.interfaces.IBasicNewsletterSupport"
+      />
 
   <browser:page
      name="view-as-newsletter"
      for="Products.Archetypes.interfaces.IBaseObject"
      permission="zope.Public"
-     class=".newsletter.DefaultNewsletterRenderer"
+     class="collective.newsletter.browser.newsletter.DefaultNewsletterRenderer"
      template="newsletter_wrapper.pt"
      />
-  
+
   <browser:page
      name="send-newsletter"
-     for="p4a.plonenewsletter.interfaces.INewsletterEnhanced"
-     permission="p4a.plonenewsletter.SendNewsletter"
-     class=".newsletter.SendNewsletterView"
+     for="collective.newsletter.interfaces.INewsletterEnhanced"
+     permission="collective_newsletter.SendNewsletter"
+     class="collective.newsletter.browser.newsletter.SendNewsletterView"
      template="newsletter.pt"
      />
 
@@ -64,24 +69,24 @@
      name="newsletter_subscription_view"
      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
      permission="zope.Public"
-     class=".subscription.NewsletterSubscriptionView"
-     allowed_interface=".subscription.INewsletterSubscriptionView"     
+     class="collective.newsletter.browser.subscription.NewsletterSubscriptionView"
+     allowed_interface="collective.newsletter.browser.subscription.INewsletterSubscriptionView"
      />
 
   <browser:page
      name="newsletter-subscribe"
      for="*"
      permission="zope.Public"
-     class=".subscription.NewsletterSubscriptionView"
+     class="collective.newsletter.browser.subscription.NewsletterSubscriptionView"
      attribute="subscribe"
      />
-  
+
   <browser:page
      name="newsletter-configuration"
      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-     class=".newsletter.NewsletterConfig"
+     class="collective.newsletter.browser.newsletter.NewsletterConfig"
      permission="cmf.ModifyPortalContent"
      template="newsletterconfig.pt"
-     />  
+     />
 
 </configure>

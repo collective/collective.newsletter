@@ -42,18 +42,18 @@ class NewsletterSubscriptionView(BrowserView):
             self._subscribe(email, selected_list['email'], api)
             message = self.context.translate(
                 msgid='newsletter_signup_successful',
-                domain='plone4artists',
+                domain='collective.newsletter',
                 default="You've successfully subscribed to the list.")
         except ValidationError:
             message = self.context.translate(
                 msgid='newsletter_signup_validation_error',
-                domain='plone4artists',
+                domain='collective.newsletter',
                 default="Signup failed. Please verify email-address (you submitted '${subemail}').",
                 mapping={'subemail': email})
         except:
             message = self.context.translate(
                 msgid='newsletter_signup_failed',
-                domain='plone4artists',
+                domain='collective.newsletter',
                 default="Signup failed. We're unable to process your request due to an internal error. If the problem persists, please contact the site administrator.")
 
             # write traceback to the logfile

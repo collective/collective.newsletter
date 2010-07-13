@@ -4,8 +4,8 @@ from zope import schema
 
 from Products.Five.browser import BrowserView
 
-from collective.newsletter.interfaces import IPossibleNewsletter, INewsletterEnhanced
-from p4a.common import feature
+from collective.newsletter.interfaces import IPossibleNewsletter
+from collective.newsletter.interfaces import INewsletterEnhanced
 
 class NewsletterEnhancementToggleView(BrowserView):
 

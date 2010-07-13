@@ -22,17 +22,12 @@
      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
      />
 
-  <browser:resource
-      name="collective_newsletter_icon.png"
-      file="collective_newsletter_icon.png"
-      />
-
   <permission
-     id="collective.newsletter.SendNewsletter"
+     id="collective_newsletter.SendNewsletter"
      title="Send newsletter"
      />
   <meta:redefinePermission
-     from="collective.newsletter.SendNewsletter"
+     from="collective_newsletter.SendNewsletter"
      to="cmf.ManagePortal"
      />
 

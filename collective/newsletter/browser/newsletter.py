@@ -1,5 +1,5 @@
 from stoneagehtml import compactify
-from collective.newsletter.utils import relative_to_absolute_url_transform, escape_to_entities
+from collective.newsletter.browser.utils import relative_to_absolute_url_transform, escape_to_entities
 
 from collective.newsletter.interfaces import IMailingListManager
 from collective.newsletter.interfaces import IMailingList
@@ -121,14 +121,14 @@ class SendNewsletterView(BrowserView):
         except ValidationError:
             message = self.context.translate(
                 msgid='send_newsletter_validation_error',
-                domain='Plone4Artists',
+                domain='collective.newsletter',
                 default="Failed sending newsletter. Please verify email-address (you submitted '${email}').",
                 mapping={'email': email})
             self.request.set('portal_status_message', message)
         except:
             message = self.context.translate(
                 msgid='send_newsletter_failed',
-                domain='Plone4Artists',
+                domain='collective.newsletter',
                 default="Failed sending newsletter. We're unable to process your request due to an internal error. If the problem persists, please contact the site administrator.")
             self.request.set('portal_status_message', message)
 
