@@ -6,7 +6,7 @@
       metal:use-macro="here/main_template/macros/master"
       i18n:domain="collective.newsletter">
 
-<div metal:fill-slot="main">
+<div metal:fill-slot="content-core">
     <h1 tal:content="string:${here/title_or_id}: Send as newsletter">Send newsletter</h1>
     <p>This form lets you prepare and send a newsletter based on the current page.</p>
 

@@ -75,10 +75,16 @@
 	  <tal:render-object
 	     define="base_url here/absolute_url;
 		     layout python: view.getTargetObjectLayout(here);
-		     template python: getattr(here, layout, None);
+		     thetemplate python: getattr(here, layout, None);">
+			 <!-- tal:test replace="layout" /><br />
+			 <tal:test replace="context" /><br /-->
+
+			 <tal:render metal:use-macro="context/layout/macros/main" />
+
+		     <!--
 		     macros template/macros | nothing;
-		     main_macro python: macros['main']">
-	    <tal:render metal:use-macro="main_macro" />
+			 main_macro python: macros['content-core']">
+	    <tal:render metal:use-macro="main_macro" /-->
 	  </tal:render-object>
 
         </div>
