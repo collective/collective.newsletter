@@ -1,4 +1,5 @@
 
-grep replace:
-p4aplonenewsletter
-Plone4ArtistsNewsletterConfig
+from p4a.common import site
+
+def setup_portal(portal):
+    site.ensure_site(portal)
