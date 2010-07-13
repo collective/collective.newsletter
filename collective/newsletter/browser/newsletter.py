@@ -14,7 +14,33 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.CMFDynamicViewFTI.interfaces import ISelectableBrowserDefault
 
+from lxml import etree
+from StringIO import StringIO
+
 class DefaultNewsletterRenderer(BrowserView):
+
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+
+    def get_rendered_snippet(self, element_id):
+        rendered_html = self.get_rendered_template()
+        parser = etree.HTMLParser()
+        tree = etree.parse(StringIO(rendered_html), parser)
+        part = tree.xpath('//*[@id="' + element_id + '"]')
+        if len(part) > 0:
+            result = etree.tostring(part[0], pretty_print=True, method="html")
+            return result
+        return None
+
+    def get_rendered_template(self):
+        # TODO: may get template via multiadapter-lookup to get the correctly
+        #       zcml registered template?
+        # TODO: has base_url to be changed this: like base_url here/absolute_url
+        #       like in newsletter_wrapper.pt
+        return getattr(self.context,
+                       self.getTargetObjectLayout(self.context), None)()
+
     def __call__(self):
         plone_view = self.context.restrictedTraverse('@@plone')
 

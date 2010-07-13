@@ -72,20 +72,28 @@
 
           <a name="documentContent"></a>
 
-	  <tal:render-object
-	     define="base_url here/absolute_url;
-		     layout python: view.getTargetObjectLayout(here);
-		     thetemplate python: getattr(here, layout, None);">
-			 <!-- tal:test replace="layout" /><br />
-			 <tal:test replace="context" /><br /-->
+		  <tal:repl
+		      replace="structure python:view.get_rendered_snippet('content')" />
 
-			 <tal:render metal:use-macro="context/layout/macros/main" />
+	  <!-- tal:render-object
+	     define="base_url here/absolute_url;
+		     thelayout python: view.getTargetObjectLayout(here);
+		     thetemplate python: getattr(here, thelayout, None);
+			 themacros thetemplate/macros | nothing;
+			 main_macro python: themacros['content-core']">
+	    <tal:render metal:use-macro="main_macro" /-->
+
+			 <!-- tal:test replace="thelayout" /><br />
+			 <tal:test replace="themacros" /><br />
+			 <tal:test replace="thetemplate" /><br /-->
+
+			 <!-- tal:render metal:use-macro="here/document_view/macros/main" /-->
 
 		     <!--
 		     macros template/macros | nothing;
 			 main_macro python: macros['content-core']">
 	    <tal:render metal:use-macro="main_macro" /-->
-	  </tal:render-object>
+	  <!-- /tal:render-object -->
 
         </div>
       </div>
