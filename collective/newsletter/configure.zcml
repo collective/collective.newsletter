@@ -14,11 +14,17 @@
      provides="Products.GenericSetup.interfaces.EXTENSION"
      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
      />
+  <genericsetup:registerProfile
+     name="uninstall"
+     title="collective.newsletter: uninstall"
+     description="Uninstalls collective.newsletter."
+     provides="Products.GenericSetup.interfaces.EXTENSION"
+     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+     />
 
-  <browser:resourceDirectory
-      name="collectivenewsletter"
-      directory="browser/resources"
-      permission="zope.Public"
+  <browser:resource
+      name="collective_newsletter_icon.png"
+      file="collective_newsletter_icon.png"
       />
 
   <permission
@@ -30,9 +36,9 @@
      to="cmf.ManagePortal"
      />
 
-  <five:traversable
+  <!-- five:traversable
       class="Products.Archetypes.BaseObject.BaseObject"
-     />
+     /-->
   <five:implements
       class="Products.Archetypes.BaseObject.BaseObject"
       interface="collective.newsletter.interfaces.IPossibleNewsletter"
