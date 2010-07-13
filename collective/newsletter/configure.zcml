@@ -1,7 +1,44 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five"
-    i18n_domain="collective.newsletter">
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:meta="http://namespaces.zope.org/meta">
 
+  <include package="Products.GenericSetup" />
+
+  <genericsetup:registerProfile
+     name="default"
+     title="collective.newsletter: default"
+     description="Installs collective.newsletter."
+     provides="Products.GenericSetup.interfaces.EXTENSION"
+     for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+     />
+
+  <browser:resourceDirectory
+      name="collectivenewsletter"
+      directory="browser/resources"
+      permission="zope.Public"
+      />
+
+  <permission
+     id="collective.newsletter.SendNewsletter"
+     title="Send newsletter"
+     />
+  <meta:redefinePermission
+     from="collective.newsletter.SendNewsletter"
+     to="cmf.ManagePortal"
+     />
+
+  <five:traversable
+      class="Products.Archetypes.BaseObject.BaseObject"
+     />
+  <five:implements
+      class="Products.Archetypes.BaseObject.BaseObject"
+      interface="collective.newsletter.interfaces.IPossibleNewsletter"
+      />
+
+  <include package=".browser" />
+  <include file="api.zcml" />
 
 </configure>

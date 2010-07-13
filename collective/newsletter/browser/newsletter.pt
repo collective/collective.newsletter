@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="p4a">
+
+<div metal:fill-slot="main">
+    <h1 tal:content="string:${here/title_or_id}: Send as newsletter">Send newsletter</h1>
+    <p>This form lets you prepare and send a newsletter based on the current page.</p>
+    
+    <form action="send-newsletter"
+	  tal:attributes="action string:${here/absolute_url}/send-newsletter"
+	  name="newsletterform"
+	  method="post">
+      
+      <input name="form.submitted" value="1" type="hidden"/>
+      <input name="js_enabled" id="js_enabled" value="0" type="hidden" />
+      <input name="cookies_enabled" id="cookies_enabled" value="" type="hidden" />
+
+      <input name="mode" type="hidden" value="" />
+      
+      <tal:select-list define="mailinglists view/getMailingLists">
+	<div tal:condition="mailinglists" class="field">
+	  <label for="list">Mailinglist</label><br />
+	  <select name="list">
+	    <option tal:repeat="list mailinglists"
+		    tal:attributes="value list/id"
+		    tal:content="string: ${list/name} (${list/email})" />
+	  </select>
+	</div>
+	<p tal:condition="not: mailinglists">
+	  No mailinglists have been configured.
+	</p>
+      
+	<div class="formControls sideBySide">
+    	  <input class="context"
+		 name="preview" 
+		 type="submit"
+		 value="Preview"
+		 onClick="this.form.elements['mode'].value='preview';" />
+	  
+	  <input tal:condition="mailinglists"
+		 class="context"
+		 name="send" 
+		 type="submit"
+		 value="Send"
+		 onClick="this.form.elements['mode'].value='send';" />
+	  
+	</div>
+      </tal:select-list>
+
+      <div class="visualClear"></div>
+   
+      <div class="document-section">
+	<p>You can also send the newsletter to a single recipient. Fill in the address-field below.</p>
+	  
+	<div class="field">
+	  <label for="email" i18n:translate="label_single_recipient_email">Recipient e-mail address</label>
+	  <br />
+	  <input size="30" type="text" name="email" />
+	</div>
+
+	<div class="formControls">
+	  <input class="context"
+		 name="send" 
+		 type="submit"
+		 value="Send"
+		 onClick="this.form.elements['mode'].value='single';" />
+
+	</div>
+      </div>
+      
+    </form>  
+</div>
+
+</html>

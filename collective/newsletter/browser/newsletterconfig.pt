@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/prefs_main_template/macros/master"
+      i18n:domain="Plone4Artists">
+
+<metal:block metal:fill-slot="top_slot"
+             tal:define="dummy python:request.set('disable_border',1)" />
+
+<body>
+
+  <div metal:fill-slot="prefs_configlet_main"
+       tal:define="mailinglists view/getMailingLists">
+    
+    <h1 i18n:translate="heading_newsletter_configuration">Newsletter configuration</h1>
+    
+    <a href=""
+       class="link-parent"
+       tal:attributes="href string: $portal_url/plone_control_panel"
+       i18n:translate="label_up_to_plone_setup">
+      Up to Site Setup
+    </a>
+
+    <form method="post">  
+      <p tal:condition="not: mailinglists">
+	There are currently no available lists.
+      </p>
+      
+      <p tal:condition="mailinglists">
+	The following lists are currently available:
+      </p>
+      
+      <div tal:repeat="list mailinglists">
+	<dt>
+	  <input type="checkbox" name="remove:list" tal:attributes="value list/id" />
+	  <span tal:content="list/name" />
+	</dt>
+	<dd>
+	  <a tal:attributes="href list/email" tal:content="list/email" /><br />
+	  <span tal:content="list/protocol" />
+	</dd>
+      </div>
+
+      <div class="formControls">
+        <input class="context"
+	       tabindex=""
+	       type="submit"
+	       name="submit"
+	       value="Remove"
+	       />
+      </div>
+      <input type="hidden" name="form.submitted" value="remove" />
+    </form>
+    
+    <form method="post">
+      <fieldset>
+	<legend>Add new mailing list</legend>
+	<div class="field">
+	  <label for="name">Name</label><br />
+	  <input type="text" size="30" name="name" />
+	</div>
+	
+	<div class="field">
+	  <label for="email">Mailinglist address</label><br />
+	  <input type="text" size="30" name="email" />
+	</div>
+
+	<div class="field">
+	  <label for="protocol">Protocol</label><br />
+	  <select name="protocol">
+	    <option tal:repeat="protocol view/getProtocols"
+		    tal:attributes="value protocol/id"
+		    tal:content="protocol/name" />
+	  </select>
+	</div>
+	
+	<div class="formControls">
+          <input class="context"
+		 tabindex=""
+		 type="submit"
+		 name="submit"
+		 value="Add"
+		 />
+	</div>
+      </fieldset>
+    
+      <input type="hidden" name="form.submitted" value="add" />
+    </form>
+
+  </div>
+
+</body>
+</html>
+
+

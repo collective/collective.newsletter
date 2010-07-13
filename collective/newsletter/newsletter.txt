@@ -1,0 +1,66 @@
+Plone4ArtistsNewsletter
+-----------------------
+
+Let's enable newsletter functionality on the front-page:
+
+  >>> frontpage = portal['front-page']
+  >>> frontpage.restrictedTraverse('@@newsletter-toggle')() # doctest: +ELLIPSIS
+  Traceback (most recent call last):
+        ...
+  Unauthorized: You are not allowed to access '@@newsletter-toggle' in this context
+
+We need permission to modify the object:
+
+  >>> self.setRoles(['Owner'])
+  >>> frontpage.restrictedTraverse('@@newsletter-toggle')() # doctest: +ELLIPSIS
+
+This should mark the object INewsletterEnhanced
+
+  >>> from p4a.plonenewsletter.interfaces import INewsletterEnhanced
+  >>> INewsletterEnhanced.providedBy(frontpage)
+  True
+
+We can call the default newsletter view on any content object:
+  
+  >>> frontpage.restrictedTraverse('@@view-as-newsletter')() # doctest: +ELLIPSIS
+  '<!DOCTYPE...
+  Welcome to Plone... 
+
+Only privileged users can send the newsletter:
+
+  >>> frontpage.restrictedTraverse('@@send-newsletter')() # doctest: +ELLIPSIS
+  Traceback (most recent call last):
+        ...
+  Unauthorized: You are not allowed to access '@@send-newsletter' in this context
+
+TODO: Continue this thread
+
+When sending out newsletter, we need to be careful about having relative URLs in
+the output:
+
+  >>> 'href="plone_control_panel"' in frontpage.getText()
+  True
+
+The newsletter view therefore transforms relative URLs into absolute URLs using
+a utility function:
+
+  >>> frontpage_path = portal_url = portal.absolute_url()
+  
+  >>> from p4a.plonenewsletter.browser.utils import relative_to_absolute_url_transform \
+  ...   as url_transform
+  >>> 'href="plone_control_panel"' in url_transform(frontpage.getText(),
+  ...					            frontpage_path,
+  ...                                               portal_url)
+  False
+
+The URL has been given an absolute reference:
+  >>> 'href="http://nohost/plone/plone_control_panel"' in url_transform(frontpage.getText(),
+  ...					                                frontpage_path,
+  ...                                                                   portal_url)
+  True
+  
+Verify that this transform is called on the newsletter view:
+
+  >>> frontpage.restrictedTraverse('@@view-as-newsletter')() # doctest: +ELLIPSIS
+  '<!DOCTYPE...
+  href="http://nohost/plone/plone_control_panel"...

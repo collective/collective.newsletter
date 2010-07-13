@@ -25,6 +25,14 @@ setup(name='collective.newsletter',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'zope.annotation',
+          'zope.component',
+          'zope.schema',
+          'zope.interface',
+          'ZODB3',
+          'Zope2',
+          'BeautifulSoup',
+          'stoneagehtml',
       ],
       extras_require = dict(test = ['interlude',],),
       )
