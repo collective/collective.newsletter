@@ -18,9 +18,9 @@ class NewsletterEnhancementToggleView(BrowserView):
         if IPossibleNewsletter.providedBy(self.context):
             ifaces = interface.directlyProvidedBy(self.context)
             if state and not INewsletterEnhanced.providedBy(self.context):
-                interface.alsoProvides(obj, INewsletterEnhanced)
+                interface.alsoProvides(self.context, INewsletterEnhanced)
             elif not state and INewsletterEnhanced in ifaces:
-                interface.directlyProvides(obj, ifaces - INewsletterEnhanced)
+                interface.directlyProvides(self.context, ifaces - INewsletterEnhanced)
     newsletter_activated = property(get_newsletter_state, set_newsletter_state)
 
     def __init__(self, context, request):
