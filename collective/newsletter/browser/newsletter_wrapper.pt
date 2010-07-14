@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<metal:block use-macro="here/global_defines/macros/defines" />
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xml:lang="en"
+    lang="en"
+    tal:define="portal_state context/@@plone_portal_state;
+        site_properties context/portal_properties/site_properties;
+        portal_title portal_state/portal_title;
+        object_title context/@@plone_context_state/object_title;
+        putils context/plone_utils;
+        language portal_state/language"
+    tal:attributes="lang language;
+        xml:lang language">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"
+        tal:define="charset site_properties/default_charset|string:utf-8"
+        tal:attributes="content string:text/html;;charset=${charset}" />
+
+    <title>
+        <tal:pagetitle replace="object_title" /> &mdash;
+        <tal:portaltitle replace="portal_title" />
+    </title>
+
+    <meta name="generator" content="Plone - http://plone.org" />
+    <meta tal:define="metatags python:putils.listMetaTags(here).items()"
+        tal:condition="metatags"
+        tal:repeat="keyval metatags"
+        tal:attributes="name python:keyval[0];
+            content python:keyval[1];" />
+
+    <tal:renderer tal:repeat="stylesheet view/stylesheets">
+        <style type="text/css"
+            tal:condition="python:stylesheet['rendering'] != 'import'"
+            tal:attributes="media stylesheet/media | nothing;"
+            tal:content="structure string:<!-- ${stylesheet/styles} -->">
+        </style>
+    </tal:renderer>
+    <style type="text/css" media="all">
+        .documentActions,
+        .documentByLine { display: none !important }
+    </style>
+    <style type="text/css" media="all"
+        tal:content="structure string:<!-- ${view/newsletter_css} -->">
+    </style>
+
+</head>
+
+<body tal:define="isRTL portal_state/is_rtl"
+    tal:attributes="class string:newsletter ${here/getSectionFromURL};
+        dir python:isRTL and 'rtl' or 'ltr'">
+
+    <tal:repl replace="structure python:view.get_rendered_snippet('content')" />
+
+</body>
+</html>

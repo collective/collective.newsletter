@@ -1,0 +1,72 @@
+<tal:block
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    i18n:domain="collective.newsletter">
+
+<dl class="portlet newsletter-subscription-portlet"
+    tal:define="portal_url context/@@plone_portal_state/portal_url;
+        subscriptionview context/@@newsletter_subscription_view;
+        mailinglists subscriptionview/mailinglists;"
+    tal:condition="mailinglists">
+
+    <dt class="portletHeader">
+        <span class="portletTopLeft" />
+        <span class="tile" i18n:translate="portlet_heading_newsletter">Newsletter</span>
+        <span class="portletTopRight" />
+    </dt>
+
+    <dd class="portletItem odd">
+        <form action="newsletter-subscribe"
+            name="newslettersubscribeform"
+            method="post"
+            tal:attributes="action string:$portal_url/newsletter-subscribe">
+
+            <div class="field">
+                <label for="subemail"
+                    i18n:translate="portlet_email_address">Your e-mail address</label>
+                <br />
+                <input size="20" type="text" id="subemail" name="subemail" />
+            </div>
+
+            <label for="fs_mailinglists" i18n:translate="portlet_select_list">
+                Select Newsletter
+            </label>
+            <fieldset id="fs_mailinglists"
+                class="field"
+                tal:condition="python: len(mailinglists) > 1">
+                <tal:rep tal:repeat="list mailinglists">
+                    <label for=""
+                        tal:attributes="for string:chk-${list/id}"
+                        tal:content="list/name" />
+                    <input type="checkbox" name="mailinglists"
+                        tal:attributes="id string:chk-${list/id};
+                                        value list/id" /><br />
+                </tal:rep>
+            </fieldset>
+
+            <input type="hidden" name="list"
+                tal:condition="python: len(mailinglists) == 1"
+                tal:repeat="list mailinglists"
+                tal:attributes="value list/id" />
+
+            <div class="visualClear" id="clear-space-before-submit" />
+
+            <div class="formControls">
+                <input class="context"
+                    type="submit" name="subscribe" value="Subscribe"
+                    i18n:attributes="value label_subscribe" />
+            </div>
+            <div class="formControls">
+                <input class="context"
+                    type="submit" name="unsubscribe" value="Unsubscribe"
+                    i18n:attributes="value label_unsubscribe" />
+            </div>
+        </form>
+    </dd>
+    <dd class="portletFooter">
+        <span class="portletBottomLeft" />
+        <span class="portletBottomRight" />
+    </dd>
+</dl>
+
+</tal:block>

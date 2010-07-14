@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <utility name="mailman"
+           factory=".api.Mailman" />
+
+  <utility name="google_groups"
+           factory=".api.GoogleGroups" />
+
+  <utility name="sympa"
+           factory=".api.Sympa" />
+
+</configure>

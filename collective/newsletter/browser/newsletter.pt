@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="here/main_template/macros/master"
+    i18n:domain="collective.newsletter">
+
+<div metal:fill-slot="content-core">
+
+    <h1>
+        <span tal:replace="string:${context/title}" />:
+        <span tal:omit-tag=""
+            i18n:translate="sendform_heading_newsletter">Send newsletter</span>
+    </h1>
+    <p i18n:translate="sendform_newsletter_description">
+        This form lets you prepare and send a newsletter based on the current
+        page.
+    </p>
+
+    <form action="send-newsletter" name="newsletterform" method="GET"
+        tal:attributes="action string:${here/absolute_url}/send-newsletter">
+
+        <input name="form.submitted" value="1" type="hidden"/>
+        <input name="mode" type="hidden" value="" />
+
+        <tal:select-list define="mailinglists view/mailinglists">
+            <div tal:condition="mailinglists" class="field">
+                <label for="list" i18n:translate="sendform_select_mailinglist">
+                    Mailinglist
+                </label><br />
+                <select name="list">
+                    <option tal:repeat="list mailinglists"
+                        tal:attributes="value list/id"
+                        tal:content="string: ${list/name} (${list/email})" />
+                </select>
+            </div>
+            <p tal:condition="not: mailinglists"
+                i18n:translate="sendform_no_mailinglists">
+                No mailinglists have been configured.
+            </p>
+
+            <div class="formControls sideBySide">
+                <input class="context"
+                    name="preview"
+                    type="submit"
+                    value="Preview"
+                    onclick="this.form.elements['mode'].value='preview';" />
+
+                <input tal:condition="mailinglists"
+                    class="context"
+                    name="send"
+                    type="submit"
+                    value="Send"
+                    onclick="this.form.elements['mode'].value='send';" />
+
+            </div>
+        </tal:select-list>
+
+        <div class="visualClear"></div>
+
+        <div class="document-section">
+            <p i18n:translate="sendform_single_description">
+                You can also send the newsletter to a single recipient.
+                Fill in the address-field below.
+            </p>
+
+            <div class="field">
+                <label for="email"
+                    i18n:translate="sendform_single_recipient_email">
+                    Recipient e-mail address</label>
+                <br />
+                <input size="30" type="text" name="email" />
+            </div>
+
+            <div class="formControls">
+                <input class="context"
+                    name="send"
+                    type="submit"
+                    value="Send"
+                    onclick="this.form.elements['mode'].value='single';" />
+            </div>
+
+        </div>
+
+    </form>
+</div>
+
+</html>

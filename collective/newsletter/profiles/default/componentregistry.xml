@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<componentregistry>
+ <utilities>
+
+  <utility
+     interface="collective.newsletter.interfaces.IMailingListManager"
+     factory="collective.newsletter.utilities.MailingListManager"
+     name="mailinglist_manager"/>
+
+  </utilities>
+</componentregistry>

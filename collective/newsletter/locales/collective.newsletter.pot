@@ -1,0 +1,223 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2010-05-28 10:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.newsletter\n"
+
+#: ./browser/subscription_portlet.py:28
+msgid "Add Newsletter Subscription Portlet"
+msgstr ""
+
+#: ./interfaces.py:32
+msgid "Available mailinglist protocols"
+msgstr ""
+
+#: ./interfaces.py:28
+msgid "Available mailinglists"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Disable Newsletter"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Disable this content item to be able to sent as a Newsletter"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Enable Newsletter"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Enable this content item to be able to sent as a Newsletter"
+msgstr ""
+
+#: ./browser/subscription_portlet.py:24
+msgid "Newsletter Subscription Portlet"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Send Newsletter"
+msgstr ""
+
+#: ./profiles/default/actions.xml
+msgid "Send this content item as a Newsletter"
+msgstr ""
+
+#: ./browser/subscription_portlet.py:29
+msgid "This portlet allows subscription to newsletters."
+msgstr ""
+
+#. Default: "Add new mailing list"
+#: ./browser/newsletterconfig.pt:62
+msgid "config_add_mailinglist"
+msgstr ""
+
+#. Default: "Could not add new mailing list. Please fill out all fields."
+#: ./browser/newsletter.py:269
+msgid "config_add_mailinglist_failed"
+msgstr ""
+
+#. Default: "The following lists are currently available:"
+#: ./browser/newsletterconfig.pt:31
+msgid "config_available_mailinglists"
+msgstr ""
+
+#. Default: "Newsletter configuration"
+#: ./browser/newsletterconfig.pt:14
+msgid "config_heading_newsletter"
+msgstr ""
+
+#. Default: "Mailinglist address"
+#: ./browser/newsletterconfig.pt:73
+msgid "config_mailinglist_address"
+msgstr ""
+
+#. Default: "Name"
+#: ./browser/newsletterconfig.pt:67
+msgid "config_mailinglist_name"
+msgstr ""
+
+#. Default: "Protocol"
+#: ./browser/newsletterconfig.pt:79
+msgid "config_mailinglist_protocol"
+msgstr ""
+
+#. Default: "There are currently no available lists."
+#: ./browser/newsletterconfig.pt:26
+msgid "config_no_mailinglists"
+msgstr ""
+
+#. Default: "Subscribe"
+#: ./browser/subscription_portlet.pt:52
+msgid "label_subscribe"
+msgstr ""
+
+#. Default: "Unsubscribe"
+#: ./browser/subscription_portlet.pt:57
+msgid "label_unsubscribe"
+msgstr ""
+
+#. Default: "Newsletter functionality disabled."
+#: ./browser/support.py:38
+msgid "newsletter_disabled"
+msgstr ""
+
+#. Default: "Newsletter functionality enabled."
+#: ./browser/support.py:41
+msgid "newsletter_enabled"
+msgstr ""
+
+#. Default: "Please select a newsletter."
+#: ./browser/subscription.py:84
+msgid "newsletter_no_selected_list"
+msgstr ""
+
+#. Default: "Newsletter sent."
+#: ./browser/newsletter.py:173
+msgid "newsletter_sent"
+msgstr ""
+
+#. Default: "Newsletter sent to a single recipient."
+#: ./browser/newsletter.py:151
+msgid "newsletter_sent_single"
+msgstr ""
+
+#. Default: "Signoff failed. We're unable to process your request due to an internal error. If the problem persists, please contact the site administrator."
+#: ./browser/subscription.py:74
+msgid "newsletter_signoff_failed"
+msgstr ""
+
+#. Default: "You've successfully unsubscribed from the list."
+#: ./browser/subscription.py:63
+msgid "newsletter_signoff_successful"
+msgstr ""
+
+#. Default: "Sigoff failed. Please verify email-address (you submitted '${subemail}')."
+#: ./browser/subscription.py:68
+msgid "newsletter_signoff_validation_error"
+msgstr ""
+
+#. Default: "Signup failed. We're unable to process your request due to an internal error. If the problem  persists, please contact the site administrator."
+#: ./browser/subscription.py:52
+msgid "newsletter_signup_failed"
+msgstr ""
+
+#. Default: "You've successfully subscribed to the list."
+#: ./browser/subscription.py:42
+msgid "newsletter_signup_successful"
+msgstr ""
+
+#. Default: "Signup failed. Please verify email-address (you submitted '${subemail}')."
+#: ./browser/subscription.py:46
+msgid "newsletter_signup_validation_error"
+msgstr ""
+
+#. Default: "Your e-mail address"
+#: ./browser/subscription_portlet.pt:26
+msgid "portlet_email_address"
+msgstr ""
+
+#. Default: "Newsletter"
+#: ./browser/subscription_portlet.pt:15
+msgid "portlet_heading_newsletter"
+msgstr ""
+
+#. Default: "Select Newsletter"
+#: ./browser/subscription_portlet.pt:35
+msgid "portlet_select_list"
+msgstr ""
+
+#. Default: "Failed sending newsletter. We're unable to process your request due to an internal error. If the problem persists, please contact the site administrator."
+#: ./browser/newsletter.py:186
+msgid "send_newsletter_failed"
+msgstr ""
+
+#. Default: "Failed sending newsletter. Please verify email-address (you submitted '${email}."
+#: ./browser/newsletter.py:179
+msgid "send_newsletter_validation_error"
+msgstr ""
+
+#. Default: "Send newsletter"
+#: ./browser/newsletter.pt:13
+msgid "sendform_heading_newsletter"
+msgstr ""
+
+#. Default: "This form lets you prepare and send a newsletter based on the current page."
+#: ./browser/newsletter.pt:16
+msgid "sendform_newsletter_description"
+msgstr ""
+
+#. Default: "No mailinglists have been configured."
+#: ./browser/newsletter.pt:38
+msgid "sendform_no_mailinglists"
+msgstr ""
+
+#. Default: "Mailinglist"
+#: ./browser/newsletter.pt:29
+msgid "sendform_select_mailinglist"
+msgstr ""
+
+#. Default: "You can also send the newsletter to a single recipient. Fill in the address-field below."
+#: ./browser/newsletter.pt:63
+msgid "sendform_single_description"
+msgstr ""
+
+#. Default: "Recipient e-mail address"
+#: ./browser/newsletter.pt:69
+msgid "sendform_single_recipient_email"
+msgstr ""
+

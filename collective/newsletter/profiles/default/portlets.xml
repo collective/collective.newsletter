@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<portlets
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="collective.newsletter">
+
+  <portlet
+    addview="collective.newsletter.subscriptionportlet"
+    title="Newsletter Subscription Portlet"
+    description="Add Newsletter Subscription Portlet."
+    />
+  <assignment
+    name="newsletter-subscription-portlet"
+    manager="plone.rightcolumn"
+    category="context"
+    key="/"
+    type="collective.newsletter.subscriptionportlet" />
+
+</portlets>
