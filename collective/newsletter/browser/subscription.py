@@ -32,6 +32,10 @@ class NewsletterSubscriptionView(BrowserView):
         unsubscribe = self.request.get('unsubscribe', None) and True or False
 
         selected_lists = self.request.get('mailinglists', None)
+        
+        if len(self.mailinglists) == 1:
+            selected_lists = self.mailinglists
+        
         if selected_lists\
            and not isinstance(selected_lists, list)\
            and not isinstance(selected_lists, tuple):
@@ -40,7 +44,7 @@ class NewsletterSubscriptionView(BrowserView):
         if selected_lists:
             for selected_list in selected_lists:
                 selected_list_info = self.mailinglist_manager.\
-                                   get_mailinglist_by_id(selected_list)
+                                   get_mailinglist_by_id(selected_list['id'])
                 api = utils.get_list_api(selected_list_info['protocol'])
                 if not unsubscribe:
                     try:

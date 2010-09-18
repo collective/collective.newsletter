@@ -25,7 +25,7 @@ class MailingListManager(SimpleItem):
 
     def get_mailinglist_by_id(self, list_id):
         for mlist in self.mailinglists:
-            if str(mlist['id']) == list_id:
+            if str(mlist['id']) == str(list_id):
                 return mlist
         return None
 
