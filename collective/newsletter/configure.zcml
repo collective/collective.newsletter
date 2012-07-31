@@ -36,12 +36,11 @@
      />
 
   <!-- five:traversable
-      class="Products.Archetypes.BaseObject.BaseObject"
-     /-->
-  <five:implements
-      class="Products.Archetypes.BaseObject.BaseObject"
-      interface="collective.newsletter.interfaces.IPossibleNewsletter"
-      />
+    class="Products.Archetypes.BaseObject.BaseObject"
+  /-->
+  <class class="Products.Archetypes.BaseObject.BaseObject">
+    <implements interface="collective.newsletter.interfaces.IPossibleNewsletter" />
+  </class>
 
   <include package=".browser" />
   <include file="api.zcml" />

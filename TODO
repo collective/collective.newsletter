@@ -5,13 +5,12 @@ TODO
 - fix encoding problems (especially the subject field is encoded in the
 moment as UTF8 which isn't understood by many clients)
 
-- use z3 class directive instead of five:implements to add interface
-56	   <class class="Products.ATContentTypes.content.image.ATImage">
-57	       <implements interface="Products.slideshowfolder.interfaces.ISlideshowImage"/>
-58	   </class>
-
 OLD
 ===
+DONE - use z3 class directive instead of five:implements to add interface
+56     <class class="Products.ATContentTypes.content.image.ATImage">
+57         <implements interface="Products.slideshowfolder.interfaces.ISlideshowImage"/>
+58     </class>
 DONE - use actions.xml instead of browser:menuitem?
 DONE - use Products.statusmessages for portal status messages instead of
   portal_status_message in support.py

@@ -30,16 +30,17 @@ class NewsletterSubscriptionView(BrowserView):
         #       subscribed
         email = self.request.get('subemail', None)
         unsubscribe = self.request.get('unsubscribe', None) and True or False
-
+        
         selected_lists = self.request.get('mailinglists', None)
         
         if len(self.mailinglists) == 1:
+            # self.mailinglists is persistent list
             selected_lists = self.mailinglists
-        
-        if selected_lists\
-           and not isinstance(selected_lists, list)\
-           and not isinstance(selected_lists, tuple):
-            selected_lists = [selected_lists]
+        else:
+            if selected_lists\
+               and not isinstance(selected_lists, list)\
+               and not isinstance(selected_lists, tuple):
+                selected_lists = [selected_lists]
 
         if selected_lists:
             for selected_list in selected_lists:
@@ -105,20 +106,20 @@ class NewsletterSubscriptionView(BrowserView):
         self.request.RESPONSE.redirect(came_from)
 
     def _subscribe(self, email, listemail, api):
-        """Register signup with mailing list."""
-
+        """Register signup with mailing list.
+        """
         send_to_address, message, subject = api.subscribe(listemail)
         self._send_request(email, subject, message, send_to_address)
 
     def _unsubscribe(self, email, listemail, api):
-        """Register signup with mailing list."""
-
+        """Register signup with mailing list.
+        """
         send_to_address, message, subject = api.unsubscribe(listemail)
         self._send_request(email, subject, message, send_to_address)
 
     def _send_request(self, email, subject, message, send_to_address):
-        """Send a subscription request to the list."""
-
+        """Send a subscription request to the list.
+        """
         # validate e-mail address
         reg_tool = getToolByName(self.context, 'portal_registration')
         if not (email and reg_tool.isValidEmail(email)):

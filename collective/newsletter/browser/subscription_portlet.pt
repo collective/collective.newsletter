@@ -28,21 +28,22 @@
                 <input size="20" type="text" id="subemail" name="subemail" />
             </div>
 
-            <label for="fs_mailinglists" i18n:translate="portlet_select_list">
-                Select Newsletter
-            </label>
-            <fieldset id="fs_mailinglists"
-                class="field"
-                tal:condition="python: len(mailinglists) > 1">
-                <tal:rep tal:repeat="list mailinglists">
-                    <label for=""
-                        tal:attributes="for string:chk-${list/id}"
-                        tal:content="list/name" />
-                    <input type="checkbox" name="mailinglists"
-                        tal:attributes="id string:chk-${list/id};
-                                        value list/id" /><br />
-                </tal:rep>
-            </fieldset>
+            <tal:multiple condition="python: len(mailinglists) > 1">
+                <label for="fs_mailinglists" i18n:translate="portlet_select_list">
+                    Select Newsletter
+                </label>
+                <fieldset id="fs_mailinglists"
+                    class="field">
+                    <tal:rep tal:repeat="list mailinglists">
+                        <label for=""
+                            tal:attributes="for string:chk-${list/id}"
+                            tal:content="list/name" />
+                        <input type="checkbox" name="mailinglists"
+                            tal:attributes="id string:chk-${list/id};
+                                            value list/id" /><br />
+                    </tal:rep>
+                </fieldset>
+            </tal:multiple>
 
             <input type="hidden" name="list"
                 tal:condition="python: len(mailinglists) == 1"
