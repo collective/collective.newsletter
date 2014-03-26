@@ -49,8 +49,7 @@
 </head>
 
 <body tal:define="isRTL portal_state/is_rtl"
-    tal:attributes="class string:newsletter ${here/getSectionFromURL};
-        dir python:isRTL and 'rtl' or 'ltr'">
+    tal:attributes="dir python:isRTL and 'rtl' or 'ltr'">
 
     <tal:repl replace="structure python:view.get_rendered_snippet('content')" />
 
